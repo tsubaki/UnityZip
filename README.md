@@ -13,7 +13,7 @@ UnityZip is zipper for unity3d.
 
 - .NET 2.0.
 
-#sample.
+#example
 
 -unzip
 
