@@ -34,3 +34,7 @@ string[] files = new string[]{ Application.temporaryCachePath + "/dir/args.txt"}
 
 ZipUtil.Zip (exportZip, files);
 ```
+
+#License
+
+This software is released under the MIT License, see LICENSE.
