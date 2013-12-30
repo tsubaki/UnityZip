@@ -22,7 +22,7 @@ public class ZipUtil
 
 	public static void Unzip (string zipFilePath, string location)
 	{
-#if UNITY_EDITOR
+#if UNITY_EDITOR || UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX
 		Directory.CreateDirectory (location);
 		
 		using (ZipFile zip = ZipFile.Read (zipFilePath)) {
@@ -40,10 +40,13 @@ public class ZipUtil
 
 	public static void Zip (string zipFileName, params string[] files)
 	{
-#if UNITY_EDITOR
+#if UNITY_EDITOR || UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX
+		string path = Path.GetDirectoryName(zipFileName);
+		Directory.CreateDirectory (path);
+		
 		using (ZipFile zip = new ZipFile()) {
 			foreach (string file in files) {
-				zip.AddFile (file);
+				zip.AddFile(file, "");
 			}
 			zip.Save (zipFileName);
 		}
