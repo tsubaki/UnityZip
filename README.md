@@ -24,7 +24,7 @@ string exportLocation = Application.temporaryCachePath + "/dir"
 ZipUtil.Unzip ( zipfilePath, exportLocation);
 ```
 
--zip (android only yet)
+-zip
 
 ```
 string exportZip = Application.temporaryCachePath + "/dir/args.zip";
