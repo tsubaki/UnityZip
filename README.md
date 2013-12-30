@@ -5,13 +5,15 @@ UnityZip is zipper for unity3d.
 
 #supported
 
--  iOS
--  Android
--  Mac.
+-  iOS.
+-  Android.
+-  Mac.and probably windows.
 
-#required
+#iOS how to
 
-- .NET 2.0.
+1.  build project.
+2.  add file "PluginsCode>iOS>ZipArchive" to xcode project.
+3.  enjoy.
 
 #example
 
