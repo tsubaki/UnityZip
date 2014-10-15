@@ -15,23 +15,26 @@ public class UnzipAndRead : MonoBehaviour {
 
 	IEnumerator Load()
 	{
+		string zipPath = Application.temporaryCachePath + "/tempZip.zip";
+		string exportPath = Application.temporaryCachePath + "/unzip";
+		string imagePath = exportPath + "/twitter_icon.png";
+
 		WWW www = new WWW("https://dl.dropboxusercontent.com/u/56297224/twitter_icon.png.zip");
 
 		yield return www;
 
 		var data = www.bytes;
-		string zipPath = Application.temporaryCachePath + "/tempZip.zip";
-		string exportPath = Application.temporaryCachePath + "/unzip";
 		File.WriteAllBytes(zipPath, data);
-
 		ZipUtil.Unzip(zipPath, exportPath);
-
 
 		var tex =  new Texture2D(1, 1);
 
-	 	var imageData = File.ReadAllBytes(exportPath + "/twitter_icon.png");
+	 	var imageData = File.ReadAllBytes(imagePath);
 		tex.LoadImage(imageData);
 
 		GetComponent<UnityEngine.UI.RawImage>().texture = tex;
+
+		File.Delete(zipPath);
+		Directory.Delete(exportPath, true);
 	}
 }
