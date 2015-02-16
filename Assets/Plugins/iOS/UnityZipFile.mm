@@ -13,7 +13,7 @@ extern "C"{
     
     
     void zip(const char*file) {
-        NSString *zipPath =[NSString stringWithCString:file];
+        NSString *zipPath =[NSString stringWithUTF8String:file];
         
         ZipArchive* zip = [[ZipArchive alloc] init];
         
@@ -38,7 +38,7 @@ extern "C"{
     
     void addZipFile(const char*file)
     {
-        NSString *zipPath =[NSString stringWithCString:file];
+        NSString *zipPath =[NSString stringWithUTF8String:file];
         
         if( list == nil){
             list = [[NSMutableArray alloc] init];
@@ -48,8 +48,8 @@ extern "C"{
     
     void unzip( char*file,  char* location)
     {
-        NSString *zipPath =[NSString stringWithCString:file];
-        NSString *destinationPath = [NSString stringWithCString:location];
+        NSString *zipPath =[NSString stringWithUTF8String:file];
+        NSString *destinationPath = [NSString stringWithUTF8String:location];
         
         ZipArchive* zip = [[ZipArchive alloc] init];
         if( [zip UnzipOpenFile:zipPath] )
