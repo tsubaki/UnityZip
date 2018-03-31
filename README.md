@@ -1,23 +1,23 @@
 UniZip
 ========
 
-UniZip is zipper for unity3d.
+UniZip is a zipper for unity3d.
 
 ![unity zip](https://dl.dropboxusercontent.com/u/56297224/Images/unityzip%20rogo.jpg)
 
-#supported
+## Supported
 
 -  iOS.
 -  Android.
 -  Mac.and probably windows.
 
-#iOS how to
+## iOS how to
 
 1.  build project.
 2.  add file "PluginsCode>iOS>ZipArchive" to xcode project.
 3.  enjoy.
 
-#example
+## Example
 
 -unzip
 
@@ -37,6 +37,6 @@ string[] files = new string[]{ Application.temporaryCachePath + "/dir/args.txt"}
 ZipUtil.Zip (exportZip, files);
 ```
 
-#License
+## License
 
 This software is released under the MIT License, see LICENSE.
