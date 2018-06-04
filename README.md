@@ -1,7 +1,7 @@
 UniZip
 ========
 
-UniZip is a zipper for unity3d.
+UniZip is a zipper for Unity3D.
 
 ![unity zip](https://githubcatw.github.io/unity_zip.jpg)
 
@@ -10,13 +10,13 @@ UniZip is a zipper for unity3d.
 -  iOS
 -  Android
 -  Mac
--  Probably Windows
+-  Windows (probably)
 
 ## iOS how to
 
 1.  Build project.
-2.  Add file "PluginsCode>iOS>ZipArchive" to xcode project.
-3.  enjoy.
+2.  Add "PluginsCode>iOS>ZipArchive" to Xcode project.
+3.  Enjoy.
 
 ## Example
 
