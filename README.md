@@ -1,25 +1,26 @@
 UniZip
 ========
 
-UniZip is zipper for unity3d.
+UniZip is a zipper for Unity3D.
 
-![unity zip](https://dl.dropboxusercontent.com/u/56297224/Images/unityzip%20rogo.jpg)
+![unity zip](https://githubcatw.github.io/unity_zip.jpg)
 
-#supported
+## Supported
 
--  iOS.
--  Android.
--  Mac.and probably windows.
+-  iOS
+-  Android
+-  Mac
+-  Windows (probably)
 
-#iOS how to
+## iOS how to
 
-1.  build project.
-2.  add file "PluginsCode>iOS>ZipArchive" to xcode project.
-3.  enjoy.
+1.  Build project.
+2.  Add "PluginsCode>iOS>ZipArchive" to Xcode project.
+3.  Enjoy.
 
-#example
+## Example
 
--unzip
+Unzip:
 
 ```
 string zipfilePath = Application.temporaryCachePath + "/args.zip"
@@ -28,7 +29,7 @@ string exportLocation = Application.temporaryCachePath + "/dir"
 ZipUtil.Unzip ( zipfilePath, exportLocation);
 ```
 
--zip
+Zip:
 
 ```
 string exportZip = Application.temporaryCachePath + "/dir/args.zip";
@@ -37,6 +38,6 @@ string[] files = new string[]{ Application.temporaryCachePath + "/dir/args.txt"}
 ZipUtil.Zip (exportZip, files);
 ```
 
-#License
+##  License
 
 This software is released under the MIT License, see LICENSE.
