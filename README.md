@@ -3,7 +3,7 @@ UniZip
 
 UniZip is zipper for unity3d.
 
-![unity zip](https://dl.dropboxusercontent.com/u/56297224/Images/unityzip%20rogo.jpg)
+![unity zip](https://github.com/rumaniel/UnityZip/blob/master/logo.jpg)
 
 #supported
 
