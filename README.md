@@ -36,6 +36,13 @@ string[] files = new string[]{ Application.temporaryCachePath + "/dir/args.txt"}
 
 ZipUtil.Zip (exportZip, files);
 ```
+#TODO
+- [ ] iOS zip
+- [ ] support async zip/unzip
+- [ ] inform result
+- [ ] support password
+- [ ] submit assetstore
+- [ ] Directry support
 
 #License
 
