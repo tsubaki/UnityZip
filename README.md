@@ -39,6 +39,7 @@ ZipUtil.Zip (exportZip, files);
 #TODO
 - [ ] iOS zip
 - [ ] support async zip/unzip
+- [ ] inform progress while async job
 - [ ] inform result
 - [ ] support password
 - [ ] submit assetstore
