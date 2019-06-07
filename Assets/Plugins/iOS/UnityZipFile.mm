@@ -3,37 +3,38 @@
 //  Unity-iPhone
 //
 //  Created by 山村 達彦 on 2013/12/29.
-//
+//  Modified by Ruman on 2019/06/07
 //
 #import "ZipArchive.h"
 
 static NSMutableArray* list = nil;
 
-extern "C"{
-    
-    
-    void zip(const char*file) {
-        NSString *zipPath =[NSString stringWithUTF8String:file];
+extern "C"
+{    
+    void zip(const char*file) 
+    {
+        // todo
+        // NSString *zipPath =[NSString stringWithUTF8String:file];
         
-        ZipArchive* zip = [[ZipArchive alloc] init];
+        // ZipArchive* zip = [[ZipArchive alloc] init];
         
         
-        [zip CreateZipFile2:zipPath];
+        // [zip CreateZipFile2:zipPath];
         
-        for(int i=0; i<list.count; i++)
-        {
+        // for(int i=0; i<list.count; i++)
+        // {
             
-            NSString* filePath = [list objectAtIndex:i];
-            NSString* fileName = [filePath lastPathComponent];
-            [zip addFileToZip:filePath newname:fileName];
-        }
+        //     NSString* filePath = [list objectAtIndex:i];
+        //     NSString* fileName = [filePath lastPathComponent];
+        //     [zip addFileToZip:filePath newname:fileName];
+        // }
         
-        [zip CloseZipFile2];
-        [zip release];
+        // [zip CloseZipFile2];
+        // [zip release];
         
-        [list removeAllObjects];
-        [list release];
-        list = nil;
+        // [list removeAllObjects];
+        // [list release];
+        // list = nil;
     }
     
     void addZipFile(const char*file)
@@ -51,13 +52,16 @@ extern "C"{
         NSString *zipPath =[NSString stringWithUTF8String:file];
         NSString *destinationPath = [NSString stringWithUTF8String:location];
         
-        ZipArchive* zip = [[ZipArchive alloc] init];
-        if( [zip UnzipOpenFile:zipPath] )
-        {
-            [zip UnzipFileTo:destinationPath overWrite:YES];
-            [zip UnzipCloseFile];
-        }
-        [zip CloseZipFile2];
-        [zip release];
+        [SSZipArchive unzipFileAtPath:zipPath
+                        toDestination:destinationPath
+                    preserveAttributes:YES
+                            overwrite:YES
+                        nestedZipLevel:0
+                            password:nil
+                                error:nil
+                            delegate:nil
+                        progressHandler:nil
+                    completionHandler:nil];
+
     }
 }

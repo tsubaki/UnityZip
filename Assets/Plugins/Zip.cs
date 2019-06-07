@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System;
+using System.Collections;
 using System.Runtime.InteropServices;
-using Ionic.Zip;
-using System.Text;
 using System.IO;
+using System.IO.Compression;
 
 public class ZipUtil
 {
@@ -23,12 +22,24 @@ public class ZipUtil
 	public static void Unzip (string zipFilePath, string location)
 	{
 #if UNITY_EDITOR || UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX || UNITY_STANDALONE_LINUX
-		Directory.CreateDirectory (location);
-		
-		using (ZipFile zip = ZipFile.Read (zipFilePath)) {
-			
-			zip.ExtractAll (location, ExtractExistingFileAction.OverwriteSilently);
-		}
+        if (!location.EndsWith(Path.DirectorySeparatorChar.ToString(), StringComparison.Ordinal))
+            location += Path.DirectorySeparatorChar;
+        
+        Directory.CreateDirectory(location);
+
+        using (ZipArchive archive = ZipFile.Open(zipFilePath, ZipArchiveMode.Update))
+        {
+            foreach (ZipArchiveEntry entry in archive.Entries)
+            {
+                string fullPath = Path.Combine(location, entry.FullName);
+
+                if (string.IsNullOrEmpty(entry.Name))
+                    System.IO.Directory.CreateDirectory(fullPath);
+                else
+                    entry.ExtractToFile(fullPath, true);
+            }
+        }
+
 #elif UNITY_ANDROID
 		using (AndroidJavaClass zipper = new AndroidJavaClass ("com.tsw.zipper")) {
 			zipper.CallStatic ("unzip", zipFilePath, location);
@@ -43,13 +54,17 @@ public class ZipUtil
 #if UNITY_EDITOR || UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX || UNITY_STANDALONE_LINUX
 		string path = Path.GetDirectoryName(zipFileName);
 		Directory.CreateDirectory (path);
-		
-		using (ZipFile zip = new ZipFile()) {
-			foreach (string file in files) {
-				zip.AddFile(file, "");
-			}
-			zip.Save (zipFileName);
-		}
+
+        // todo
+        // System.IO.Compression.ZipFile.ExtractToDirectory(srcPath, destPath);
+
+        
+		// using (ZipFile zip = new ZipFile()) {
+		// 	foreach (string file in files) {
+		// 		zip.AddFile(file, "");
+		// 	}
+		// 	zip.Save (zipFileName);
+		// }
 #elif UNITY_ANDROID
 		using (AndroidJavaClass zipper = new AndroidJavaClass ("com.tsw.zipper")) {
 			{
