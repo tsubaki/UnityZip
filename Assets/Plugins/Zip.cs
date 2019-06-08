@@ -49,12 +49,10 @@ public class ZipUtil
 #endif
 	}
 
+// https://stackoverflow.com/a/46119361/2655055
 	public static void Zip (string zipFileName, params string[] files)
 	{
 #if UNITY_EDITOR || UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX || UNITY_STANDALONE_LINUX
-		string path = Path.GetDirectoryName(zipFileName);
-		Directory.CreateDirectory (path);
-
         if (files.Length > 0)
         {
             if (File.Exists(files[0]))
@@ -94,17 +92,6 @@ public class ZipUtil
         {
             throw new Exception("You must specify at least one file to zip.");
         }
-
-        // todo
-        // System.IO.Compression.ZipFile.ExtractToDirectory(srcPath, destPath);
-
-        
-		// using (ZipFile zip = new ZipFile()) {
-		// 	foreach (string file in files) {
-		// 		zip.AddFile(file, "");
-		// 	}
-		// 	zip.Save (zipFileName);
-		// }
 #elif UNITY_ANDROID
 		using (AndroidJavaClass zipper = new AndroidJavaClass ("com.tsw.zipper")) {
 			{
