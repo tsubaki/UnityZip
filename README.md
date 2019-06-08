@@ -11,12 +11,6 @@ UniZip is zipper for unity3d.
 -  Android.
 -  Mac.and probably windows.
 
-#iOS how to
-
-1.  build project.
-2.  add file "PluginsCode>iOS>ZipArchive" to xcode project.
-3.  enjoy.
-
 #example
 
 -unzip
