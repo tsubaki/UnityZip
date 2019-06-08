@@ -6,7 +6,7 @@ UniZip is zipper for unity3d.
 
 ## Getting Started
 
-Copy all items from the Assets folder to your Unity3d Assets folder.
+Copy all items from the Assets/Plugins folder to your Unity3d Assets/Plugins folder.
 
 ## supported
 
@@ -28,10 +28,10 @@ ZipUtil.Unzip(zipfilePath, exportLocation);
 ### zip
 
 ```C#
-string exportZip = Application.temporaryCachePath + "/dir/args.zip";
-string[] files = new string[] { Application.temporaryCachePath + "/dir/args.txt" }
+string exportZip = Application.temporaryCachePath + "/args.zip";
+string[] files = new string[] { Application.dataPath + "/Example/Resources/args.txt" };
 
-ZipUtil.Zip (exportZip, files);
+ZipUtil.Zip(exportZip, files);
 ```
 
 ## TODO
