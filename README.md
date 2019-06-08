@@ -6,7 +6,7 @@ UniZip is zipper for unity3d.
 
 ## Getting Started
 
-Copy all itmes from Assets folder to your Unity3d Assets folder.
+Copy all items from the Assets folder to your Unity3d Assets folder.
 
 ## supported
 
