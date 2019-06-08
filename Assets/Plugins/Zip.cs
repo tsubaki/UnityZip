@@ -55,6 +55,46 @@ public class ZipUtil
 		string path = Path.GetDirectoryName(zipFileName);
 		Directory.CreateDirectory (path);
 
+        if (files.Length > 0)
+        {
+            if (File.Exists(files[0]))
+            {
+                // Get the first file in the list so we can get the root directory
+                string strRootDirectory = Path.GetDirectoryName(files[0]);
+
+                // Set up a temporary directory to save the files to (that we will eventually zip up)
+                DirectoryInfo dirTemp = Directory.CreateDirectory(strRootDirectory + "/" + DateTime.Now.ToString("yyyyMMddhhmmss"));
+
+                // Copy all files to the temporary directory
+                foreach (string strFilePath in files)
+                {
+                    if (!File.Exists(strFilePath))
+                    {
+                        throw new Exception(string.Format("File {0} does not exist", strFilePath));
+                    }
+                    string strDestinationFilePath = Path.Combine(dirTemp.FullName, Path.GetFileName(strFilePath));
+                    File.Copy(strFilePath, strDestinationFilePath);
+                }
+
+                // Create the zip file using the temporary directory
+                if (!zipFileName.EndsWith(".zip")) { zipFileName += ".zip"; }
+                string strZipPath = Path.Combine(strRootDirectory, zipFileName);
+                if (File.Exists(strZipPath)) { File.Delete(strZipPath); }
+                ZipFile.CreateFromDirectory(dirTemp.FullName, strZipPath, System.IO.Compression.CompressionLevel.Fastest, false);
+
+                // Delete the temporary directory
+                dirTemp.Delete(true);                
+            }
+            else
+            {
+                throw new Exception(string.Format("File {0} does not exist", files[0]));
+            }
+        }
+        else
+        {
+            throw new Exception("You must specify at least one file to zip.");
+        }
+
         // todo
         // System.IO.Compression.ZipFile.ExtractToDirectory(srcPath, destPath);
 
