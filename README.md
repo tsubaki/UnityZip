@@ -1,44 +1,53 @@
-UniZip
+# UniZip
 ========
 
 UniZip is zipper for unity3d.
 
 ![unity zip](https://github.com/rumaniel/UnityZip/blob/master/logo.jpg)
 
-#supported
+## Getting Started
+
+Copy all itmes from Assets folder to your Unity3d Assets folder.
+
+## supported
 
 -  iOS.
 -  Android.
--  Mac.and probably windows.
+-  Standalone(Includes Mac and Windows)
 
-#example
+## example
 
--unzip
+### unzip
 
-```
+```C#
 string zipfilePath = Application.temporaryCachePath + "/args.zip"
 string exportLocation = Application.temporaryCachePath + "/dir"
 
-ZipUtil.Unzip ( zipfilePath, exportLocation);
+ZipUtil.Unzip(zipfilePath, exportLocation);
 ```
 
--zip
+### zip
 
-```
+```C#
 string exportZip = Application.temporaryCachePath + "/dir/args.zip";
-string[] files = new string[]{ Application.temporaryCachePath + "/dir/args.txt"}
+string[] files = new string[] { Application.temporaryCachePath + "/dir/args.txt" }
 
 ZipUtil.Zip (exportZip, files);
 ```
-#TODO
-- [ ] iOS zip
-- [ ] support async zip/unzip
-- [ ] inform progress while async job
-- [ ] inform result
-- [ ] support password
-- [ ] submit assetstore
-- [ ] Directry support
+## TODO
 
-#License
+- [ ] Support async zip/unzip
+- [ ] Inform progress while async job
+- [ ] Inform result
+- [ ] Support password
+- [ ] Submit assetstore
+- [ ] Directory support
 
-This software is released under the MIT License, see LICENSE.
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
+
+## Acknowledgments
+
+* It's inspired of [SSZipArchive](https://github.com/ZipArchive/ZipArchive).
+
