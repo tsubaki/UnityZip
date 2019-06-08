@@ -13,54 +13,42 @@ extern "C"
 {    
     void zip(const char*file) 
     {
-        // todo
-        // NSString *zipPath =[NSString stringWithUTF8String:file];
-        
-        // ZipArchive* zip = [[ZipArchive alloc] init];
-        
-        
-        // [zip CreateZipFile2:zipPath];
-        
-        // for(int i=0; i<list.count; i++)
-        // {
-            
-        //     NSString* filePath = [list objectAtIndex:i];
-        //     NSString* fileName = [filePath lastPathComponent];
-        //     [zip addFileToZip:filePath newname:fileName];
-        // }
-        
-        // [zip CloseZipFile2];
-        // [zip release];
-        
-        // [list removeAllObjects];
-        // [list release];
-        // list = nil;
-    }
-    
-    void addZipFile(const char*file)
-    {
         NSString *zipPath =[NSString stringWithUTF8String:file];
         
-        if( list == nil){
+        [SSZipArchive createZipFileAtPath:zipPath
+                         withFilesAtPaths:[list copy]];
+
+        [list removeAllObjects];
+
+        list = nil;
+    }
+    
+    void addZipFile(const char* file)
+    {
+        NSString *zipPath = [NSString stringWithUTF8String:file];
+        
+        if( list == nil)
+        {
             list = [[NSMutableArray alloc] init];
         }
+        
         [list addObject: zipPath];
     }
     
-    void unzip( char*file,  char* location)
+    void unzip(const char* file, const char* location)
     {
-        NSString *zipPath =[NSString stringWithUTF8String:file];
+        NSString *zipPath = [NSString stringWithUTF8String:file];
         NSString *destinationPath = [NSString stringWithUTF8String:location];
         
         [SSZipArchive unzipFileAtPath:zipPath
                         toDestination:destinationPath
-                    preserveAttributes:YES
+                   preserveAttributes:YES
                             overwrite:YES
-                        nestedZipLevel:0
-                            password:nil
+                       nestedZipLevel:0
+                             password:nil
                                 error:nil
-                            delegate:nil
-                        progressHandler:nil
+                             delegate:nil
+                      progressHandler:nil
                     completionHandler:nil];
 
     }
