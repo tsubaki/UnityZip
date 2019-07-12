@@ -9,17 +9,17 @@ public class ZipUtil
 {
 #if UNITY_IPHONE
 	[DllImport("__Internal")]
-	private static extern void unzip (string zipFilePath, string location);
+	private static extern void unzip(string zipFilePath, string location);
 
 	[DllImport("__Internal")]
-	private static extern void zip (string zipFilePath);
+	private static extern void zip(string zipFilePath);
 
 	[DllImport("__Internal")]
-	private static extern void addZipFile (string addFile);
+	private static extern void addZipFile(string addFile);
 
 #endif
 
-	public static void Unzip (string zipFilePath, string location)
+	public static void Unzip(string zipFilePath, string location)
 	{
 #if UNITY_EDITOR || UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX || UNITY_STANDALONE_LINUX
         if (!location.EndsWith(Path.DirectorySeparatorChar.ToString(), StringComparison.Ordinal))
@@ -41,16 +41,17 @@ public class ZipUtil
         }
 
 #elif UNITY_ANDROID
-		using (AndroidJavaClass zipper = new AndroidJavaClass ("com.tsw.zipper")) {
-			zipper.CallStatic ("unzip", zipFilePath, location);
+		using (AndroidJavaClass zipper = new AndroidJavaClass("com.tsw.zipper")) 
+        {
+			zipper.CallStatic("unzip", zipFilePath, location);
 		}
 #elif UNITY_IPHONE
-		unzip (zipFilePath, location);
+		unzip(zipFilePath, location);
 #endif
 	}
 
 // https://stackoverflow.com/a/46119361/2655055
-	public static void Zip (string zipFileName, params string[] files)
+	public static void Zip(string zipFileName, params string[] files)
 	{
 #if UNITY_EDITOR || UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX || UNITY_STANDALONE_LINUX
         if (files.Length > 0)
@@ -67,42 +68,44 @@ public class ZipUtil
                 foreach (string strFilePath in files)
                 {
                     if (!File.Exists(strFilePath))
-                    {
                         throw new Exception(string.Format("File {0} does not exist", strFilePath));
-                    }
+                        
                     string strDestinationFilePath = Path.Combine(dirTemp.FullName, Path.GetFileName(strFilePath));
+                    
                     File.Copy(strFilePath, strDestinationFilePath);
                 }
 
                 // Create the zip file using the temporary directory
-                if (!zipFileName.EndsWith(".zip")) { zipFileName += ".zip"; }
+                if (!zipFileName.EndsWith(".zip")) 
+                    zipFileName += ".zip"; 
+                
                 string strZipPath = Path.Combine(strRootDirectory, zipFileName);
-                if (File.Exists(strZipPath)) { File.Delete(strZipPath); }
+                
+                if (File.Exists(strZipPath)) 
+                    File.Delete(strZipPath); 
+                
                 ZipFile.CreateFromDirectory(dirTemp.FullName, strZipPath, System.IO.Compression.CompressionLevel.Fastest, false);
 
                 // Delete the temporary directory
                 dirTemp.Delete(true);                
             }
             else
-            {
                 throw new Exception(string.Format("File {0} does not exist", files[0]));
-            }
         }
         else
-        {
             throw new Exception("You must specify at least one file to zip.");
-        }
 #elif UNITY_ANDROID
-		using (AndroidJavaClass zipper = new AndroidJavaClass ("com.tsw.zipper")) {
-			{
-				zipper.CallStatic ("zip", zipFileName, files);
-			}
+		using (AndroidJavaClass zipper = new AndroidJavaClass("com.tsw.zipper")) 
+        {
+            zipper.CallStatic("zip", zipFileName, files);
 		}
 #elif UNITY_IPHONE
-		foreach (string file in files) {
-			addZipFile (file);
+		foreach (string file in files) 
+        {
+			addZipFile(file);
 		}
-		zip (zipFileName);
+        
+		zip(zipFileName);
 #endif
 	}
 }
