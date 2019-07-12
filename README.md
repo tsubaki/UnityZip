@@ -42,6 +42,7 @@ ZipUtil.Zip(exportZip, files);
 - [ ] Support password
 - [ ] Submit assetstore
 - [ ] Directory support
+- [ ] Support unityhub distribution
 
 ## License
 
